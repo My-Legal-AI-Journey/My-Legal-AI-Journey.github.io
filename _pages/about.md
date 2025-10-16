@@ -1,3 +1,9 @@
+---
+layout: page
+title: "关于我"
+permalink: /about/
+---
+
 # 郭一铄 (Zane)
 
 **Legal AI Researcher | 法律与人工智能探索者**
