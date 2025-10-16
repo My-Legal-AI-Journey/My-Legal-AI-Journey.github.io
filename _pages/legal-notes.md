@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 title: "法学笔记"
 permalink: /legal-notes/
 ---
