@@ -53,6 +53,8 @@ layout: default
   
   .sidebar-nav li {
     margin-bottom: 6px;
+    display: flex;
+    align-items: center;
   }
   
   .sidebar-nav a {
@@ -69,6 +71,12 @@ layout: default
   .sidebar-nav a:hover {
     background: #0366d6;
     color: white;
+  }
+  
+  .breadcrumb-arrow {
+    margin: 0 5px;
+    color: #d1d5da;
+    font-size: 12px;
   }
   
   .toc-list {
@@ -154,85 +162,71 @@ document.addEventListener('DOMContentLoaded', function() {
   setupSmoothScrolling();
 });
 
-// 修复的面包屑导航逻辑
+// 智能面包屑导航 - 包含所有层级并使用页面标题
 function generateFixedBreadcrumb() {
   const breadcrumbNav = document.getElementById('breadcrumb-nav');
   const currentPath = window.location.pathname;
+  const pageTitle = document.title.replace(' - My Legal AI Journey', '').replace(' | My Legal AI Journey', ''); // 移除网站后缀
   
   let breadcrumbHTML = '';
   
   // 总是显示首页
   breadcrumbHTML += '<li><a href="/">🏠 首页</a></li>';
   
-  // 构建完整的面包屑路径
-  const pathSegments = currentPath.split('/').filter(segment => segment);
+  // 构建完整的面包屑路径，过滤掉空值和index.html等
+  const pathSegments = currentPath.split('/').filter(segment => 
+    segment && segment !== 'index.html' && !segment.endsWith('.html')
+  );
   
   let accumulatedPath = '';
-  let breadcrumbItems = [];
   
   // 为每个路径段创建面包屑项
   pathSegments.forEach((segment, index) => {
     accumulatedPath += '/' + segment;
     
-    // 跳过当前页面（最后一个段）
-    if (index === pathSegments.length - 1) return;
+    let displayName = getDisplayName(segment);
+    const isLast = index === pathSegments.length - 1;
     
-    let displayName = '';
-    
-    // 根据路径段设置显示名称
-    switch(segment) {
-      case 'legal-notes':
-        displayName = '📚 法学笔记';
-        break;
-      case 'civil-law':
-        displayName = '⚖️ 民法笔记';
-        break;
-      case 'intellectual-property':
-        displayName = '💡 知识产权法';
-        break;
-      case 'general-theory':
-        displayName = '民法总论';
-        break;
-      case 'obligation-contract':
-        displayName = '债与合同法';
-        break;
-      case 'property-law':
-        displayName = '物权法';
-        break;
-      case 'family-inheritance':
-        displayName = '婚姻家庭与继承法';
-        break;
-      case 'personality-rights':
-        displayName = '人格权法';
-        break;
-      case 'tort-law':
-        displayName = '侵权法';
-        break;
-      case 'copyright':
-        displayName = '著作权法';
-        break;
-      case 'patent':
-        displayName = '专利法';
-        break;
-      case 'trademark':
-        displayName = '商标法';
-        break;
-      default:
-        displayName = segment;
+    // 如果是最后一项且没有特殊显示名称，尝试使用页面标题
+    if (isLast && displayName === segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' ')) {
+      displayName = pageTitle || displayName;
     }
     
-    breadcrumbItems.push({
-      path: accumulatedPath,
-      name: displayName
-    });
-  });
-  
-  // 生成面包屑链接
-  breadcrumbItems.forEach(item => {
-    breadcrumbHTML += `<li><a href="${item.path}/">${item.name}</a></li>`;
+    // 添加箭头分隔符（除了最后一项）
+    if (!isLast) {
+      breadcrumbHTML += `<li><a href="${accumulatedPath}/">${displayName}</a><span class="breadcrumb-arrow">›</span></li>`;
+    } else {
+      // 最后一项不加链接，表示当前页面
+      breadcrumbHTML += `<li><span style="padding: 6px 8px; color: #24292e; font-weight: 500;">${displayName}</span></li>`;
+    }
   });
   
   breadcrumbNav.innerHTML = breadcrumbHTML;
+}
+
+// 显示名称映射函数
+function getDisplayName(segment) {
+  const nameMap = {
+    'legal-notes': '📚 法学笔记',
+    'civil-law': '⚖️ 民法笔记', 
+    'intellectual-property': '💡 知识产权法',
+    'general-theory': '📖 民法总论',
+    'obligation-contract': '📝 债与合同法',
+    'property-law': '🏠 物权法',
+    'family-inheritance': '👨‍👩‍👧‍👦 婚姻家庭与继承法',
+    'personality-rights': '👤 人格权法',
+    'tort-law': '⚔️ 侵权法',
+    'copyright': '📄 著作权法',
+    'patent': '🔬 专利法',
+    'trademark': '🏷️ 商标法',
+    'ai-notes': '🤖 AI学习笔记',
+    'projects': '🚀 项目实践',
+    'about': 'ℹ️ 关于本站',
+    'contact': '📞 联系方式'
+  };
+  
+  return nameMap[segment.toLowerCase()] || 
+         segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' ');
 }
 
 function generateTOC() {
