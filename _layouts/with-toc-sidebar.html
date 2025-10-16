@@ -3,38 +3,40 @@ layout: default
 ---
 
 <style>
-  /* 修复版样式 - 侧边栏更靠左，完全保持原主题 */
+  /* 激进左移方案 */
   .page-container-wrapper {
     display: flex;
     max-width: 1200px;
-    margin: 0 auto;
-    gap: 15px; /* 减少间距，让侧边栏更靠左 */
-    padding: 20px;
+    margin: 0; /* 移除自动居中 */
+    gap: 15px;
+    padding: 20px 20px 20px 0; /* 只保留右、上、下padding */
     align-items: flex-start;
   }
   
   /* 侧边栏更靠左 */
   .sidebar-fixed {
-    width: 230px; /* 稍微调窄 */
+    width: 230px;
     flex-shrink: 0;
     background: #f8f9fa;
-    border-radius: 6px;
+    border-radius: 0 6px 6px 0; /* 左上角直角，更贴合边缘 */
     padding: 15px;
     position: sticky;
     top: 20px;
     max-height: calc(100vh - 40px);
     overflow-y: auto;
     font-size: 13px;
-    margin-left: -10px; /* 关键：向左偏移 */
+    margin-left: 0; /* 移除负margin */
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1); /* 添加右边阴影 */
   }
   
-  /* 主内容区完全保持原样 */
+  /* 主内容区 */
   .content-original {
     flex: 1;
     min-width: 0;
-    /* 不添加任何样式，完全保持原主题 */
+    padding-left: 20px; /* 给内容一些左边距 */
   }
   
+  /* 其他样式保持不变 */
   .sidebar-title {
     font-size: 14px;
     font-weight: 600;
@@ -110,11 +112,16 @@ layout: default
   @media (max-width: 768px) {
     .page-container-wrapper {
       flex-direction: column;
+      padding: 15px; /* 移动端恢复正常padding */
     }
     .sidebar-fixed {
       width: 100%;
       position: static;
-      margin-left: 0;
+      border-radius: 6px;
+      box-shadow: none;
+    }
+    .content-original {
+      padding-left: 0;
     }
   }
 </style>
