@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: with-toc-sidebar
 title: "法学笔记"
 permalink: /legal-notes/
 ---
