@@ -18,9 +18,9 @@ collections:
 # 默认配置
 defaults:
   - scope:
-      path: "_pages"
+      path: "" 
     values:
-      layout: "page"
+      layout: "default"
 
 # 你的信息
 author:
