@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: with-toc-sidebar
 title: "民法笔记"
 permalink: /civil-law/
 nav_order: 1
