@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title }} - {{ site.title }}</title>
+  <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/style.css">
+</head>
+<body>
+  <header>
+    <h1><a href="{{ site.baseurl }}/">{{ site.title }}</a></h1>
+    <p>{{ site.description }}</p>
+    <nav>
+      {% for page_path in site.header_pages %}
+        {% assign page = site.pages | where: "path", page_path | first %}
+        {% if page.title %}
+          <a href="{{ page.url | relative_url }}">{{ page.title }}</a>
+        {% endif %}
+      {% endfor %}
+    </nav>
+  </header>
+
+  <main>
+    {{ content }}
+  </main>
+
+  <footer>
+    <p>&copy; {{ site.time | date: '%Y' }} {{ site.author.name }}</p>
+  </footer>
+</body>
+</html>
