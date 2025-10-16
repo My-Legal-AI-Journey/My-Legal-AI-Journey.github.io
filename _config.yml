@@ -5,7 +5,7 @@ baseurl: ""
 url: "https://my-legal-ai-journey.github.io"
 
 # 构建设置
-theme: jekyll-theme-cayman
+theme: jekyll-theme-minimal
 plugins:
   - jekyll-feed
 
