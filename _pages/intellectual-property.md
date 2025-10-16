@@ -5,7 +5,7 @@ permalink: /intellectual-property/
 nav_order: 2
 ---
 
-# 🎵 知识产权法专题
+# 📖 知识产权法法学习笔记
 
 > AI时代的知识产权挑战与机遇
 
