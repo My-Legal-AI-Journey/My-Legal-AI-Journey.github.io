@@ -1,0 +1,21 @@
+# 基础设置
+title: "zane - Legal AI Researcher"
+description: "Legal AI Researcher | Computational Law & AI Governance | Neural Symbolic Reasoning & Multi-Agent Systems"
+baseurl: ""
+url: "https://my-legal-ai-journey.github.io/My-Legal-AI-Journey.guthub.io/"
+
+# 构建设置
+theme: jekyll-theme-cayman
+plugins:
+  - jekyll-feed
+
+# 你的信息
+author:
+  name: "郭一铄"
+  email: "yishuoguo@126.com"
+  github: "My-Legal-AI-Journey"
+  
+# 网站导航
+header_pages:
+  - about.md
+  - legal-notes.md
