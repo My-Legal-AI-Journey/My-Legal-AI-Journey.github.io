@@ -1,9 +1,3 @@
----
-layout: page
-title: "法学笔记"
-permalink: /legal-notes/
----
-
 # 我的法学思考笔记
 
 > 记录法律学习与AI技术交叉的思考
