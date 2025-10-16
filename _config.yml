@@ -9,6 +9,19 @@ theme: jekyll-theme-cayman
 plugins:
   - jekyll-feed
 
+# 关键配置
+collections:
+  pages:
+    output: true
+    permalink: /:path/
+
+# 默认配置
+defaults:
+  - scope:
+      path: "_pages"
+    values:
+      layout: "page"
+
 # 你的信息
 author:
   name: "郭一铄"
