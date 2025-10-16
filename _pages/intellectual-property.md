@@ -14,3 +14,7 @@ nav_order: 2
 ### 2. [专利法](/intellectual-property/patent/)
 
 ### 3. [商标法](/intellectual-property/trademark/)
+
+---
+# 导航
+[返回首页](/) → [法学笔记](/legal-notes/) → [知识产权法笔记](/intellectual-property/)
