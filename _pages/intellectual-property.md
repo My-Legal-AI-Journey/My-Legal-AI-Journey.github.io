@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: with-toc-sidebar
 title: "知识产权法笔记"
 permalink: /intellectual-property/
 nav_order: 2
