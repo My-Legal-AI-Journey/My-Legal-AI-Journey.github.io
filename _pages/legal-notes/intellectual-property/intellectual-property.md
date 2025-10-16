@@ -9,11 +9,11 @@ nav_order: 2
 
 ## 各编专题
 
-### 1. [著作权法](/intellectual-property/copyright/)
+### 1. [著作权法](/copyright/)
 
-### 2. [专利法](/intellectual-property/patent/)
+### 2. [专利法](/patent/)
 
-### 3. [商标法](/intellectual-property/trademark/)
+### 3. [商标法](/trademark/)
 
 ---
 # 导航
