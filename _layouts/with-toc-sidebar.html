@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: "en-US" }}">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      .page-wrapper {
+        display: flex;
+        max-width: 1400px;
+        margin: 0 auto;
+        gap: 40px;
+        padding: 20px;
+      }
+      
+      .sidebar {
+        width: 320px;
+        flex-shrink: 0;
+        background: #f8f9fa;
+        border-radius: 8px;
+        padding: 20px;
+        margin-top: 20px;
+        position: sticky;
+        top: 20px;
+        max-height: calc(100vh - 40px);
+        overflow-y: auto;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      }
+      
+      .main-content {
+        flex: 1;
+        min-width: 0;
+        background: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      }
+      
+      /* 侧边栏导航样式 */
+      .sidebar h3 {
+        margin-top: 0;
+        color: #24292e;
+        border-bottom: 2px solid #0366d6;
+        padding-bottom: 10px;
+        font-size: 18px;
+      }
+      
+      .sidebar-nav {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      
+      .sidebar-nav li {
+        margin-bottom: 6px;
+      }
+      
+      .sidebar-nav a {
+        display: flex;
+        align-items: center;
+        padding: 8px 12px;
+        color: #586069;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+        font-size: 14px;
+        line-height: 1.4;
+      }
+      
+      .sidebar-nav a:hover {
+        background: #0366d6;
+        color: white;
+      }
+      
+      .sidebar-nav .active {
+        background: #0366d6;
+        color: white;
+        font-weight: 500;
+      }
+      
+      .nav-section {
+        margin-bottom: 15px;
+      }
+      
+      .nav-section-title {
+        font-weight: 600;
+        color: #24292e;
+        font-size: 14px;
+        margin: 20px 0 12px 0;
+        padding-left: 8px;
+        border-left: 3px solid #0366d6;
+      }
+      
+      .nav-subitem {
+        padding-left: 28px !important;
+        font-size: 13px !important;
+      }
+      
+      .nav-subsubitem {
+        padding-left: 44px !important;
+        font-size: 12px !important;
+        color: #6a737d !important;
+      }
+      
+      /* 可折叠箭头 */
+      .toggle-arrow {
+        margin-right: 8px;
+        transition: transform 0.2s ease;
+        font-size: 12px;
+        width: 16px;
+        text-align: center;
+      }
+      
+      .collapsed .toggle-arrow {
+        transform: rotate(-90deg);
+      }
+      
+      .collapsible-section {
+        transition: all 0.3s ease;
+      }
+      
+      .collapsed + .section-content {
+        display: none;
+      }
+      
+      .section-content {
+        margin-left: 16px;
+      }
+      
+      /* 页面内标题样式 */
+      .main-content h1 {
+        border-bottom: 2px solid #eaecef;
+        padding-bottom: 10px;
+        margin-top: 0;
+      }
+      
+      .main-content h2 {
+        border-left: 4px solid #0366d6;
+        padding-left: 12px;
+        margin-top: 30px;
+      }
+      
+      .main-content h3 {
+        border-left: 2px solid #28a745;
+        padding-left: 12px;
+        margin-top: 20px;
+      }
+      
+      /* 响应式设计 */
+      @media (max-width: 1024px) {
+        .page-wrapper {
+          flex-direction: column;
+        }
+        .sidebar {
+          width: 100%;
+          position: static;
+          order: 2;
+        }
+        .main-content {
+          order: 1;
+        }
+      }
+    </style>
+    {% seo %}
+  </head>
+  <body>
+    <div class="page-wrapper">
+      <!-- 智能侧边栏 -->
+      <nav class="sidebar" id="toc-sidebar">
+        <h3>📚 导航目录</h3>
+        
+        <!-- 返回按钮 -->
+        <div class="nav-section">
+          <ul class="sidebar-nav">
+            <li><a href="/" class="back-home">← 返回首页</a></li>
+            <li><a href="/legal-notes/" class="{% if page.url contains '/legal-notes' %}active{% endif %}">📖 法学笔记主页</a></li>
+          </ul>
+        </div>
+        
+        <!-- 页面标题索引 -->
+        <div class="nav-section">
+          <div class="nav-section-title">📄 本页目录</div>
+          <div id="page-toc"></div>
+        </div>
+        
+        <!-- 网站导航 -->
+        <div class="nav-section">
+          <div class="nav-section-title">🌐 网站导航</div>
+          <ul class="sidebar-nav" id="site-navigation">
+            <!-- 民法笔记部分 -->
+            <li>
+              <a href="javascript:void(0)" class="collapsible-section" data-section="civil-law">
+                <span class="toggle-arrow">▼</span>⚖️ 民法笔记
+              </a>
+              <ul class="section-content" id="civil-law-section">
+                <li><a href="/civil-law/">民法总览</a></li>
+                <li><a href="/civil-law/general-theory/" class="nav-subitem">民法总论</a></li>
+                <li><a href="/civil-law/obligation-contract/" class="nav-subitem">债与合同法</a></li>
+                <li><a href="/civil-law/property-law/" class="nav-subitem">物权法</a></li>
+                <li><a href="/civil-law/family-inheritance/" class="nav-subitem">婚姻家庭与继承法</a></li>
+                <li><a href="/civil-law/personality-rights/" class="nav-subitem">人格权法</a></li>
+                <li><a href="/civil-law/tort-law/" class="nav-subitem">侵权法</a></li>
+              </ul>
+            </li>
+            
+            <!-- 知识产权法部分 -->
+            <li>
+              <a href="javascript:void(0)" class="collapsible-section" data-section="ip-law">
+                <span class="toggle-arrow">▼</span>💡 知识产权法
+              </a>
+              <ul class="section-content" id="ip-law-section">
+                <li><a href="/intellectual-property/">知识产权总览</a></li>
+                <li><a href="/intellectual-property/copyright/" class="nav-subitem">著作权法</a></li>
+                <li><a href="/intellectual-property/patent/" class="nav-subitem">专利法</a></li>
+                <li><a href="/intellectual-property/trademark/" class="nav-subitem">商标法</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      
+      <!-- 主要内容区域 -->
+      <main class="main-content">
+        {{ content }}
+      </main>
+    </div>
+
+    <script>
+      // 折叠/展开功能
+      document.addEventListener('DOMContentLoaded', function() {
+        // 网站导航折叠功能
+        const collapsibleSections = document.querySelectorAll('.collapsible-section');
+        collapsibleSections.forEach(section => {
+          section.addEventListener('click', function() {
+            this.classList.toggle('collapsed');
+            const arrow = this.querySelector('.toggle-arrow');
+            if (this.classList.contains('collapsed')) {
+              arrow.textContent = '▶';
+            } else {
+              arrow.textContent = '▼';
+            }
+          });
+        });
+        
+        // 生成页面标题目录
+        generatePageTOC();
+        
+        // 平滑滚动到锚点
+        setupSmoothScrolling();
+      });
+      
+      // 生成页面标题目录
+      function generatePageTOC() {
+        const mainContent = document.querySelector('.main-content');
+        const headings = mainContent.querySelectorAll('h1, h2, h3, h4');
+        const tocContainer = document.getElementById('page-toc');
+        
+        if (headings.length <= 1) {
+          tocContainer.innerHTML = '<p style="color: #6a737d; font-size: 13px; padding: 0 12px;">本页暂无标题结构</p>';
+          return;
+        }
+        
+        let tocHTML = '<ul class="sidebar-nav">';
+        let currentLevel = 1;
+        
+        headings.forEach((heading, index) => {
+          if (heading.tagName === 'H1' && index === 0) return; // 跳过页面主标题
+          
+          const level = parseInt(heading.tagName.substring(1));
+          const id = heading.id || `heading-${index}`;
+          heading.id = id;
+          
+          const text = heading.textContent;
+          const indentClass = getIndentClass(level);
+          
+          tocHTML += `
+            <li>
+              <a href="#${id}" class="toc-link ${indentClass}" data-level="${level}">
+                ${getToggleArrow(level)}
+                ${text}
+              </a>
+            </li>
+          `;
+        });
+        
+        tocHTML += '</ul>';
+        tocContainer.innerHTML = tocHTML;
+        
+        // 为TOC添加折叠功能
+        setupTOCCollapsible();
+      }
+      
+      // 获取缩进类名
+      function getIndentClass(level) {
+        switch(level) {
+          case 1: return '';
+          case 2: return 'nav-subitem';
+          case 3: return 'nav-subsubitem';
+          default: return 'nav-subsubitem';
+        }
+      }
+      
+      // 获取切换箭头（仅对可折叠的级别显示）
+      function getToggleArrow(level) {
+        if (level <= 2) {
+          return '<span class="toggle-arrow">▼</span>';
+        }
+        return '<span style="width: 16px; display: inline-block;"></span>';
+      }
+      
+      // 设置TOC折叠功能
+      function setupTOCCollapsible() {
+        const tocLinks = document.querySelectorAll('.toc-link[data-level="1"], .toc-link[data-level="2"]');
+        
+        tocLinks.forEach(link => {
+          if (link.querySelector('.toggle-arrow')) {
+            link.style.cursor = 'pointer';
+            link.addEventListener('click', function(e) {
+              const level = parseInt(this.getAttribute('data-level'));
+              const nextItems = getNextTOCItems(this);
+              
+              if (nextItems.length > 0) {
+                e.preventDefault();
+                this.classList.toggle('collapsed');
+                const arrow = this.querySelector('.toggle-arrow');
+                
+                if (this.classList.contains('collapsed')) {
+                  arrow.textContent = '▶';
+                  nextItems.forEach(item => item.style.display = 'none');
+                } else {
+                  arrow.textContent = '▼';
+                  nextItems.forEach(item => item.style.display = '');
+                }
+              } else {
+                // 如果没有子项，直接跳转
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                  targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+              }
+            });
+          } else {
+            // 直接跳转
+            link.addEventListener('click', function(e) {
+              e.preventDefault();
+              const targetId = this.getAttribute('href').substring(1);
+              const targetElement = document.getElementById(targetId);
+              if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth' });
+              }
+            });
+          }
+        });
+      }
+      
+      // 获取TOC中下一个项目
+      function getNextTOCItems(currentLink) {
+        const items = [];
+        let nextElement = currentLink.parentElement.nextElementSibling;
+        
+        while (nextElement) {
+          const link = nextElement.querySelector('.toc-link');
+          if (link) {
+            const nextLevel = parseInt(link.getAttribute('data-level'));
+            const currentLevel = parseInt(currentLink.getAttribute('data-level'));
+            
+            if (nextLevel > currentLevel) {
+              items.push(nextElement);
+              nextElement = nextElement.nextElementSibling;
+            } else {
+              break;
+            }
+          } else {
+            break;
+          }
+        }
+        
+        return items;
+      }
+      
+      // 设置平滑滚动
+      function setupSmoothScrolling() {
+        const links = document.querySelectorAll('a[href^="#"]');
+        links.forEach(link => {
+          link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href !== '#') {
+              e.preventDefault();
+              const targetElement = document.querySelector(href);
+              if (targetElement) {
+                targetElement.scrollIntoView({ 
+                  behavior: 'smooth',
+                  block: 'start'
+                });
+              }
+            }
+          });
+        });
+      }
+    </script>
+  </body>
+</html>
