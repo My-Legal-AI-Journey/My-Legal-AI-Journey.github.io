@@ -3,10 +3,11 @@ layout: with-toc-sidebar
 title: "民法总论"
 permalink: /civil-law-general-theory/
 ---
+# 民法总论
 
-# 前理解
+## 前理解
 
-# 私法的工具
+## 私法的工具
 
 ---
 
