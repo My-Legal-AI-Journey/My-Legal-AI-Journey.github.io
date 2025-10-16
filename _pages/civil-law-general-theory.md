@@ -2,7 +2,6 @@
 layout: default
 title: "民法总论"
 permalink: /civil-law-general-theory/
-nav_order: 1 
 ---
 
 # ⚖️ 民法总论
