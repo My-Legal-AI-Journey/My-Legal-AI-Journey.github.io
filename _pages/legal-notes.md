@@ -1,3 +1,9 @@
+---
+layout: page
+title: "关于我"
+permalink: /about/
+---
+
 # 我的法学思考笔记
 
 > 记录法律学习与AI技术交叉的思考
