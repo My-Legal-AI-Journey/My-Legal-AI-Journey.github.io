@@ -16,3 +16,5 @@ permalink: /about/
 ## 联系方式
 - 邮箱: yishuoguo@126.com
 - GitHub: [My-Legal-AI-Journey](https://github.com/My-Legal-AI-Journey)
+---
+[🏠 返回首页](/index.html)
