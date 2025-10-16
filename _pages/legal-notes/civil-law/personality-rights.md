@@ -7,5 +7,5 @@ permalink: /personality-rights/
 
 ---
 
-# 导航
+## 导航
 [返回首页](/) → [法学笔记](/legal-notes/) → [民法笔记](/civil-law/) → 人格权法
