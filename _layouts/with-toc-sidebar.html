@@ -3,7 +3,7 @@ layout: default
 ---
 
 <style>
-  /* 修正方案：侧边栏绝对定位，正文独立居中 */
+  /* 视口单位靠边方案 */
   .page-container-wrapper {
     display: flex;
     max-width: 1200px;
@@ -11,35 +11,31 @@ layout: default
     gap: 15px;
     padding: 20px;
     align-items: flex-start;
-    position: relative; /* 为绝对定位的侧边栏提供参考 */
+    position: relative;
   }
   
-  /* 侧边栏使用绝对定位脱离正常文档流 */
+  /* 侧边栏固定在视口左侧 */
   .sidebar-fixed {
     width: 230px;
+    flex-shrink: 0;
     background: #f8f9fa;
     border-radius: 0 6px 6px 0;
     padding: 15px;
-    position: fixed; /* 改为 fixed 定位 */
-    left: 0; /* 固定在左侧 */
+    position: sticky;
     top: 20px;
     max-height: calc(100vh - 40px);
     overflow-y: auto;
     font-size: 13px;
+    /* 关键：使用calc计算靠边位置 */
+    margin-left: calc(-50vw + 50% + 10px);
     box-shadow: 2px 0 10px rgba(0,0,0,0.1);
-    z-index: 1000;
   }
   
-  /* 正文保持原主题样式并居中 */
   .content-original {
     flex: 1;
     min-width: 0;
-    margin: 0 auto; /* 确保正文居中 */
-    /* 添加左边距避免被侧边栏遮挡 */
-    margin-left: calc(230px + 20px); /* 侧边栏宽度 + 一些间距 */
   }
   
-/* 其他样式保持不变 */
   .sidebar-title {
     font-size: 14px;
     font-weight: 600;
@@ -112,27 +108,14 @@ layout: default
     color: #6a737d;
   }
   
-  @media (max-width: 1024px) {
-    .sidebar-fixed {
-      position: static;
-      width: 100%;
-      border-radius: 6px;
-      margin-bottom: 20px;
-    }
-    
-    .content-original {
-      margin-left: 0;
-    }
-    
+  @media (max-width: 768px) {
     .page-container-wrapper {
       flex-direction: column;
     }
-  }
-  
-  /* 小屏幕适配 */
-  @media (max-width: 768px) {
-    .page-container-wrapper {
-      padding: 15px;
+    .sidebar-fixed {
+      width: 100%;
+      position: static;
+      margin-left: 0;
     }
   }
 </style>
