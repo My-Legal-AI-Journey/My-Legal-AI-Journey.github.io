@@ -3,37 +3,37 @@ layout: default
 ---
 
 <style>
-  /* 激进左移方案 */
+  /* 视口单位靠边方案 */
   .page-container-wrapper {
     display: flex;
     max-width: 1200px;
-    margin: 0; /* 移除自动居中 */
+    margin: 0 auto;
     gap: 15px;
-    padding: 20px 20px 20px 0; /* 只保留右、上、下padding */
+    padding: 20px;
     align-items: flex-start;
+    position: relative;
   }
   
-  /* 侧边栏更靠左 */
+  /* 侧边栏固定在视口左侧 */
   .sidebar-fixed {
     width: 230px;
     flex-shrink: 0;
     background: #f8f9fa;
-    border-radius: 0 6px 6px 0; /* 左上角直角，更贴合边缘 */
+    border-radius: 0 6px 6px 0;
     padding: 15px;
     position: sticky;
     top: 20px;
     max-height: calc(100vh - 40px);
     overflow-y: auto;
     font-size: 13px;
-    margin-left: 0; /* 移除负margin */
-    box-shadow: 2px 0 10px rgba(0,0,0,0.1); /* 添加右边阴影 */
+    /* 关键：使用calc计算靠边位置 */
+    margin-left: calc(-50vw + 50% + 10px);
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
   }
   
-  /* 主内容区 */
   .content-original {
     flex: 1;
     min-width: 0;
-    padding-left: 20px; /* 给内容一些左边距 */
   }
   
   /* 其他样式保持不变 */
