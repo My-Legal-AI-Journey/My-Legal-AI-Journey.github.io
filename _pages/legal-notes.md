@@ -1,7 +1,6 @@
-markdown
 ---
 layout: page
-title: "法学笔记" 
+title: "法学笔记"
 permalink: /legal-notes/
 ---
 
