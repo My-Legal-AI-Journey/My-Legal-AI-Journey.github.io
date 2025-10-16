@@ -2,18 +2,33 @@
 layout: default
 title: "民法笔记"
 permalink: /civil-law/
-nav_order: 1  # 导航顺序（可选）
+nav_order: 1
 ---
 
-# 📖 民法学习笔记
+# 📚 民法知识体系
 
-> 记录民法学习与AI技术结合的思考
+> 系统化学习民法各编，探索与AI技术的结合点
 
-## 合同法学
-### 电子合同的法律效力
-- **技术实现**：区块链存证与智能合约
-- **法律分析**：电子签名的法律认可
+## 🎯 各编专题
 
-### 格式条款的算法识别
-- **研究目标**：用NLP自动识别不公平条款
-- **技术路径**：文本分类+法律规则引擎
+### 1. [民法总论](/civil-law/general-theory/)
+
+### 2. [债与合同法](/civil-law/obligation-contract/)
+
+### 3. [物权法](/civil-law/property-law/)
+
+### 4. [婚姻家庭与继承法](/civil-law/family-inheritance/)
+
+### 5. [人格权法](/civil-law/personality-rights/)
+
+### 6. [侵权法](/civil-law/tort-law/)
+
+---
+
+# 🔍 民法与AI交叉研究
+- 智能合约的合同法适用
+- 算法决策的侵权责任
+- 个人信息的人格权保护
+- 数字遗产的继承问题
+
+[⬅️ 返回法学笔记主页](/legal-notes/)
