@@ -6,8 +6,6 @@ permalink: /about/
 
 # 郭一铄 (Zane)
 
-**Legal AI Researcher | 法律与人工智能探索者**
-
 ## 研究方向
 - 法律推理的计算化建模
 - 大模型在法律领域的应用
