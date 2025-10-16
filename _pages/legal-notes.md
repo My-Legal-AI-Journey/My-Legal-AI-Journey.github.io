@@ -1,7 +1,8 @@
+markdown
 ---
 layout: page
-title: "关于我"
-permalink: /about/
+title: "法学笔记" 
+permalink: /legal-notes/
 ---
 
 # 我的法学思考笔记
