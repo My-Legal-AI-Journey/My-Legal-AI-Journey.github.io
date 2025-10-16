@@ -11,17 +11,17 @@ nav_order: 1
 
 ## 🎯 各编专题
 
-### 1. [民法总论](/civil-law/general-theory/)
+### 1. [民法总论](/civil-law-general-theory/)
 
-### 2. [债与合同法](/civil-law/obligation-contract/)
+### 2. [债与合同法](/civil-law-obligation-contract/)
 
-### 3. [物权法](/civil-law/property-law/)
+### 3. [物权法](/civil-law-property-law/)
 
-### 4. [人格权法](/civil-law/personality-rights/)
+### 4. [人格权法](/civil-law-personality-rights/)
 
-### 5. [婚姻家庭与继承法](/civil-law/family-inheritance/)
+### 5. [婚姻家庭与继承法](/civil-law-family-inheritance/)
 
-### 6. [侵权法](/civil-law/tort-law/)
+### 6. [侵权法](/civil-law-tort-law/)
 
 ---
 
