@@ -12,8 +12,13 @@ title: "首页"
 ### [查看我的介绍](/about/)
   
 ### [核心知识体系](/core-knowledge-system/)
+- 法学笔记
+- AI治理理论
+- AI技术基础
   
 ### [学科交叉基础](/interdisciplinary-fundamentals/)
+- 哲学
+- 社会科学
 
 ## 最新动态
 - 学习机器学习
