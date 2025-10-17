@@ -10,9 +10,9 @@ permalink: /core-knowledge-system/
 
 ### 1. [法学笔记](/legal-notes/)
 
-### 2. [AI治理](/ai-governance/)  
+### 2. [AI治理理论](/ai-governance/)  
 
-### 3. [AI技术](/ai-technology/)
+### 3. [AI技术基础](/ai-technology/)
 
 ## 近期更新
 - **2025.10.16** - 新增网站框架
@@ -20,6 +20,7 @@ permalink: /core-knowledge-system/
 ## 近期学习重点
 - 物权法
 - 民法总论
+- 机器学习
 
 *内容持续更新中...*
 
