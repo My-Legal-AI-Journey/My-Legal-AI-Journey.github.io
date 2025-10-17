@@ -9,10 +9,15 @@ permalink: /core-knowledge-system/
 ## 笔记分类
 
 ### 1. [法学笔记](/legal-notes/)
+- 民法笔记
+- 知识产权法笔记
 
 ### 2. [AI治理理论](/ai-governance/)  
 
 ### 3. [AI技术基础](/ai-technology/)
+- 机器学习
+- 深度学习
+- 自然语言处理
 
 ## 近期更新
 - **2025.10.16** - 新增网站框架
