@@ -1,7 +1,7 @@
 ---
 layout: with-toc-sidebar
 title: "核心知识体系"
-permalink: /core knowledge system/
+permalink: /core-knowledge-system/
 ---
 
 # 核心知识体系
