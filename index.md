@@ -8,9 +8,12 @@ title: "首页"
 我是一名行走在**法律与人工智能**交叉路口的探索者
 
 ## 快速导航
-- [查看我的介绍](/about/)
-- [核心知识体系](/core-knowledge-system/)
-- [学科交叉基础](/interdisciplinary-fundamentals/)
+
+### [查看我的介绍](/about/)
+  
+### [核心知识体系](/core-knowledge-system/)
+  
+### [学科交叉基础](/interdisciplinary-fundamentals/)
 
 ## 最新动态
 - 学习机器学习
