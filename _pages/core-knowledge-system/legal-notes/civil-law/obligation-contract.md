@@ -5,6 +5,8 @@ permalink: /obligation-contract/
 ---
 # 债与合同法
 
+*内容持续更新中...*
+
 ---
 
 ## 导航
