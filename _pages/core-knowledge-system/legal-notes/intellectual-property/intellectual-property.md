@@ -17,4 +17,4 @@ nav_order: 2
 
 ---
 ## 导航
-[返回首页](/) → [法学笔记](/legal-notes/) → 知识产权法笔记
+[返回首页](/) → [核心知识体系](/core-knowledge-system/) → [法学笔记](/legal-notes/) → 知识产权法笔记
