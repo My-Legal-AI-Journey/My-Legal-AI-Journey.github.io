@@ -14,4 +14,4 @@ nav_order: 1
 ---
 
 ## 导航
-[返回首页](/) → [核心知识体系](/interdisciplinary- fundamentals/)  → 哲学
+[返回首页](/) → [学科交叉基础](/interdisciplinary-fundamentals/)  → 哲学
