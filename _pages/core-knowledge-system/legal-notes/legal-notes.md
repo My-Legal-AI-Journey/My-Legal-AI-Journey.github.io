@@ -31,4 +31,4 @@ permalink: /legal-notes/
 *内容持续更新中...*
 
 ---
-[返回首页](/index.html)
+[返回首页](/) → [核心知识体系](/core-knowledge-system/) → 法学笔记
