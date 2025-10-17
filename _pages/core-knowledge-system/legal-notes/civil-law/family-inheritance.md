@@ -5,6 +5,8 @@ permalink: /family-inheritance/
 ---
 # 婚姻家庭与继承法
 
+*内容持续更新中...*
+
 ---
 
 ## 导航
