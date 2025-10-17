@@ -6,8 +6,6 @@ permalink: /legal-notes/
 
 # 我的法学笔记
 
-> 记录法律学习与AI技术交叉的思考
-
 ## 笔记分类
 
 ### 1. [民法笔记](/civil-law/)
