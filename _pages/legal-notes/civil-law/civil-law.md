@@ -5,11 +5,11 @@ permalink: /civil-law/
 nav_order: 1
 ---
 
-# 📚 民法知识体系
+# 民法知识体系
 
 > 系统化学习民法各编
 
-## 🎯 各编专题
+## 各编专题
 
 ### 1. [民法总论](/general-theory/)
 
