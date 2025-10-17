@@ -12,4 +12,4 @@ permalink: /a-brief-history-of-western-philosophy/
 ---
 
 ## 导航
-[返回首页](/) → [交叉学科基础](/interdisciplinary- fundamentals/) → [哲学](/philosophy/) → 西方哲学简史
+[返回首页](/) → [交叉学科基础](/interdisciplinary-fundamentals/) → [哲学](/philosophy/) → 西方哲学简史
