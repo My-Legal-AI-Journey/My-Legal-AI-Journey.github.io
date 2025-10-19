@@ -1,37 +1,38 @@
----
-layout: default
----
-
 <style>
-  /* 只在原有布局上添加侧边栏，不改变其他样式 */
-  .page-body {
+  /* 视口单位靠边方案 */
+  .page-container-wrapper {
     display: flex;
     max-width: 1200px;
     margin: 0 auto;
-    gap: 20px;
+    gap: 15px;
     padding: 20px;
+    align-items: flex-start;
+    position: relative;
   }
   
-  .toc-sidebar {
-    width: 250px;
+  /* 侧边栏固定在视口左侧 */
+  .sidebar-fixed {
+    width: 230px;
     flex-shrink: 0;
     background: #f8f9fa;
-    border-radius: 6px;
+    border-radius: 0 6px 6px 0;
     padding: 15px;
     position: sticky;
     top: 20px;
     max-height: calc(100vh - 40px);
     overflow-y: auto;
     font-size: 13px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    /* 关键：使用calc计算靠边位置 */
+    margin-left: calc(-50vw + 50% + 60px);
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
   }
   
-  .main-content-area {
+  .content-original {
     flex: 1;
     min-width: 0;
   }
   
-  .toc-title {
+  .sidebar-title {
     font-size: 14px;
     font-weight: 600;
     margin: 0 0 12px 0;
@@ -40,19 +41,45 @@ layout: default
     color: #24292e;
   }
   
-  .toc-list {
+  .sidebar-nav {
     list-style: none;
     padding: 0;
     margin: 0 0 15px 0;
   }
   
+  .sidebar-nav li {
+    margin-bottom: 6px;
+  }
+  
+  .sidebar-nav a {
+    display: block;
+    padding: 6px 8px;
+    color: #586069;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: all 0.2s ease;
+    line-height: 1.3;
+    font-size: 12px;
+  }
+  
+  .sidebar-nav a:hover {
+    background: #0366d6;
+    color: white;
+  }
+  
+  .toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
   .toc-item {
-    margin-bottom: 5px;
+    margin-bottom: 4px;
   }
   
   .toc-link {
     display: block;
-    padding: 5px 8px;
+    padding: 4px 8px;
     color: #586069;
     text-decoration: none;
     border-radius: 3px;
@@ -77,69 +104,44 @@ layout: default
     color: #6a737d;
   }
   
-  .breadcrumb-nav {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 15px 0;
-  }
-  
-  .breadcrumb-item {
-    margin-bottom: 5px;
-  }
-  
-  .breadcrumb-link {
-    display: block;
-    padding: 6px 8px;
-    color: #586069;
-    text-decoration: none;
-    border-radius: 3px;
-    transition: all 0.2s ease;
-    line-height: 1.3;
-    font-size: 12px;
-  }
-  
-  .breadcrumb-link:hover {
-    background: #28a745;
-    color: white;
-  }
-  
   @media (max-width: 768px) {
-    .page-body {
+    .page-container-wrapper {
       flex-direction: column;
     }
-    .toc-sidebar {
+    .sidebar-fixed {
       width: 100%;
       position: static;
+      margin-left: 0;
     }
   }
 </style>
 
-<div class="page-body">
-  <!-- 侧边栏 -->
-  <aside class="toc-sidebar">
-    <!-- 返回导航 -->
-    <div class="toc-title">🔙 快速导航</div>
-    <ul class="breadcrumb-nav" id="breadcrumb-nav">
-      <!-- 动态生成 -->
+<div class="page-container-wrapper">
+  <!-- 修复的侧边栏 - 更靠左 -->
+  <aside class="sidebar-fixed">
+    <!-- 修复的面包屑导航 -->
+    <div class="sidebar-title">🔙 快速导航</div>
+    <ul class="sidebar-nav" id="breadcrumb-nav">
+      <!-- 动态生成完整的面包屑 -->
     </ul>
     
     <!-- 本页目录 -->
-    <div class="toc-title">📑 本页目录</div>
+    <div class="sidebar-title">📑 本页目录</div>
     <div id="page-toc-container">
       <!-- 动态生成 -->
     </div>
   </aside>
   
   <!-- 主内容区 - 完全保持原主题样式 -->
-  <main class="main-content-area">
+  <div class="content-original">
     {{ content }}
-  </main>
+  </div>
 </div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  // 生成面包屑导航
-  generateBreadcrumb();
+  // 修复的面包屑导航生成
+  generateFixedBreadcrumb();
   
   // 生成页面目录
   generateTOC();
@@ -148,33 +150,89 @@ document.addEventListener('DOMContentLoaded', function() {
   setupSmoothScrolling();
 });
 
-function generateBreadcrumb() {
+// 修复的面包屑导航逻辑
+function generateFixedBreadcrumb() {
   const breadcrumbNav = document.getElementById('breadcrumb-nav');
   const currentPath = window.location.pathname;
   
   let breadcrumbHTML = '';
   
-  // 首页链接
-  breadcrumbHTML += '<li class="breadcrumb-item"><a href="/" class="breadcrumb-link">🏠 返回首页</a></li>';
+  // 总是显示首页
+  breadcrumbHTML += '<li><a href="/">🏠 首页</a></li>';
   
-  // 根据当前页面生成上级链接
-  if (currentPath.includes('/legal-notes/')) {
-    breadcrumbHTML += '<li class="breadcrumb-item"><a href="/legal-notes/" class="breadcrumb-link">📚 法学笔记主页</a></li>';
-  }
+  // 构建完整的面包屑路径
+  const pathSegments = currentPath.split('/').filter(segment => segment);
   
-  if (currentPath.includes('/civil-law/') && currentPath !== '/civil-law/') {
-    breadcrumbHTML += '<li class="breadcrumb-item"><a href="/civil-law/" class="breadcrumb-link">⚖️ 民法笔记主页</a></li>';
-  }
+  let accumulatedPath = '';
+  let breadcrumbItems = [];
   
-  if (currentPath.includes('/intellectual-property/') && currentPath !== '/intellectual-property/') {
-    breadcrumbHTML += '<li class="breadcrumb-item"><a href="/intellectual-property/" class="breadcrumb-link">💡 知识产权法主页</a></li>';
-  }
+  // 为每个路径段创建面包屑项
+  pathSegments.forEach((segment, index) => {
+    accumulatedPath += '/' + segment;
+    
+    // 跳过当前页面（最后一个段）
+    if (index === pathSegments.length - 1) return;
+    
+    let displayName = '';
+    
+    // 根据路径段设置显示名称
+    switch(segment) {
+      case 'legal-notes':
+        displayName = '📚 法学笔记';
+        break;
+      case 'civil-law':
+        displayName = '⚖️ 民法笔记';
+        break;
+      case 'intellectual-property':
+        displayName = '💡 知识产权法';
+        break;
+      case 'general-theory':
+        displayName = '民法总论';
+        break;
+      case 'obligation-contract':
+        displayName = '债与合同法';
+        break;
+      case 'property-law':
+        displayName = '物权法';
+        break;
+      case 'family-inheritance':
+        displayName = '婚姻家庭与继承法';
+        break;
+      case 'personality-rights':
+        displayName = '人格权法';
+        break;
+      case 'tort-law':
+        displayName = '侵权法';
+        break;
+      case 'copyright':
+        displayName = '著作权法';
+        break;
+      case 'patent':
+        displayName = '专利法';
+        break;
+      case 'trademark':
+        displayName = '商标法';
+        break;
+      default:
+        displayName = segment;
+    }
+    
+    breadcrumbItems.push({
+      path: accumulatedPath,
+      name: displayName
+    });
+  });
+  
+  // 生成面包屑链接
+  breadcrumbItems.forEach(item => {
+    breadcrumbHTML += `<li><a href="${item.path}/">${item.name}</a></li>`;
+  });
   
   breadcrumbNav.innerHTML = breadcrumbHTML;
 }
 
 function generateTOC() {
-  const mainContent = document.querySelector('.main-content-area');
+  const mainContent = document.querySelector('.content-original');
   const headings = mainContent.querySelectorAll('h2, h3, h4');
   const tocContainer = document.getElementById('page-toc-container');
   
