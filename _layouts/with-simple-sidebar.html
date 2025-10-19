@@ -1,0 +1,223 @@
+---
+layout: default
+---
+
+<style>
+  /* 只在原有布局上添加侧边栏，不改变其他样式 */
+  .page-body {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .toc-sidebar {
+    width: 250px;
+    flex-shrink: 0;
+    background: #f8f9fa;
+    border-radius: 6px;
+    padding: 15px;
+    position: sticky;
+    top: 20px;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+    font-size: 13px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  .main-content-area {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .toc-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 0 12px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e1e4e8;
+    color: #24292e;
+  }
+  
+  .toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 15px 0;
+  }
+  
+  .toc-item {
+    margin-bottom: 5px;
+  }
+  
+  .toc-link {
+    display: block;
+    padding: 5px 8px;
+    color: #586069;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: all 0.2s ease;
+    line-height: 1.3;
+    font-size: 12px;
+  }
+  
+  .toc-link:hover {
+    background: #0366d6;
+    color: white;
+  }
+  
+  .toc-level-2 {
+    padding-left: 12px;
+    font-size: 11px;
+  }
+  
+  .toc-level-3 {
+    padding-left: 20px;
+    font-size: 11px;
+    color: #6a737d;
+  }
+  
+  .breadcrumb-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 15px 0;
+  }
+  
+  .breadcrumb-item {
+    margin-bottom: 5px;
+  }
+  
+  .breadcrumb-link {
+    display: block;
+    padding: 6px 8px;
+    color: #586069;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: all 0.2s ease;
+    line-height: 1.3;
+    font-size: 12px;
+  }
+  
+  .breadcrumb-link:hover {
+    background: #28a745;
+    color: white;
+  }
+  
+  @media (max-width: 768px) {
+    .page-body {
+      flex-direction: column;
+    }
+    .toc-sidebar {
+      width: 100%;
+      position: static;
+    }
+  }
+</style>
+
+<div class="page-body">
+  <!-- 侧边栏 -->
+  <aside class="toc-sidebar">
+    <!-- 返回导航 -->
+    <div class="toc-title">🔙 快速导航</div>
+    <ul class="breadcrumb-nav" id="breadcrumb-nav">
+      <!-- 动态生成 -->
+    </ul>
+    
+    <!-- 本页目录 -->
+    <div class="toc-title">📑 本页目录</div>
+    <div id="page-toc-container">
+      <!-- 动态生成 -->
+    </div>
+  </aside>
+  
+  <!-- 主内容区 - 完全保持原主题样式 -->
+  <main class="main-content-area">
+    {{ content }}
+  </main>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // 生成面包屑导航
+  generateBreadcrumb();
+  
+  // 生成页面目录
+  generateTOC();
+  
+  // 设置平滑滚动
+  setupSmoothScrolling();
+});
+
+function generateBreadcrumb() {
+  const breadcrumbNav = document.getElementById('breadcrumb-nav');
+  const currentPath = window.location.pathname;
+  
+  let breadcrumbHTML = '';
+  
+  // 首页链接
+  breadcrumbHTML += '<li class="breadcrumb-item"><a href="/" class="breadcrumb-link">🏠 返回首页</a></li>';
+  
+  // 根据当前页面生成上级链接
+  if (currentPath.includes('/legal-notes/')) {
+    breadcrumbHTML += '<li class="breadcrumb-item"><a href="/legal-notes/" class="breadcrumb-link">📚 法学笔记主页</a></li>';
+  }
+  
+  if (currentPath.includes('/civil-law/') && currentPath !== '/civil-law/') {
+    breadcrumbHTML += '<li class="breadcrumb-item"><a href="/civil-law/" class="breadcrumb-link">⚖️ 民法笔记主页</a></li>';
+  }
+  
+  if (currentPath.includes('/intellectual-property/') && currentPath !== '/intellectual-property/') {
+    breadcrumbHTML += '<li class="breadcrumb-item"><a href="/intellectual-property/" class="breadcrumb-link">💡 知识产权法主页</a></li>';
+  }
+  
+  breadcrumbNav.innerHTML = breadcrumbHTML;
+}
+
+function generateTOC() {
+  const mainContent = document.querySelector('.main-content-area');
+  const headings = mainContent.querySelectorAll('h2, h3, h4');
+  const tocContainer = document.getElementById('page-toc-container');
+  
+  if (headings.length === 0) {
+    tocContainer.innerHTML = '<p style="color: #6a737d; font-size: 11px; padding: 0 8px; margin: 0;">本页暂无标题</p>';
+    return;
+  }
+  
+  let tocHTML = '<ul class="toc-list">';
+  
+  headings.forEach((heading, index) => {
+    const level = parseInt(heading.tagName.substring(1));
+    const id = heading.id || `heading-${index}`;
+    heading.id = id;
+    
+    const text = heading.textContent.trim();
+    const levelClass = `toc-level-${level}`;
+    
+    tocHTML += `
+      <li class="toc-item">
+        <a href="#${id}" class="toc-link ${levelClass}">${text}</a>
+      </li>
+    `;
+  });
+  
+  tocHTML += '</ul>';
+  tocContainer.innerHTML = tocHTML;
+}
+
+function setupSmoothScrolling() {
+  const links = document.querySelectorAll('.toc-link');
+  links.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const href = this.getAttribute('href');
+      const targetElement = document.querySelector(href);
+      if (targetElement) {
+        targetElement.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+}
+</script>
