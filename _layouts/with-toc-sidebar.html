@@ -39,7 +39,7 @@ layout: default
     min-width: 0;
     /* 改善正文阅读体验 + 两端对齐 */
     color: #2d3748;
-    line-height: 1.6;
+    line-height: 1.6; /* 基础行高 */
     text-align: justify;
     text-justify: inter-word;
     hyphens: auto;
@@ -47,24 +47,35 @@ layout: default
     font-family: "Times New Roman", "Noto Serif SC", serif;
   }
 
-  /* 对段落应用两端对齐和段首缩进 */
+  /* 对段落应用两端对齐、段首缩进和段间距 */
   .content-original p {
     text-align: justify;
     text-justify: inter-word;
     text-indent: 2em; /* 段首缩进两个字符 */
-    margin-bottom: 1em;
+    margin-top: 0;
+    margin-bottom: 1.5em; /* 正文段后距：1.5倍行距 */
+    line-height: 1.6; /* 正文行高 */
   }
 
-  /* 列表项不缩进 */
+  /* 列表项不缩进，但设置段间距 */
   .content-original ul,
-  .content-original ol,
-  .content-original li {
+  .content-original ol {
     text-align: justify;
     text-justify: inter-word;
     text-indent: 0; /* 列表不需要缩进 */
+    margin-top: 0;
+    margin-bottom: 1.5em; /* 列表段后距：1.5倍行距 */
   }
 
-  /* 标题保持左对齐，不缩进 */
+  .content-original li {
+    text-align: justify;
+    text-justify: inter-word;
+    text-indent: 0;
+    margin-bottom: 0.5em; /* 列表项之间的间距 */
+    line-height: 1.6;
+  }
+
+  /* 标题设置：段前距和段后距为2倍行距 */
   .content-original h1,
   .content-original h2,
   .content-original h3,
@@ -74,9 +85,51 @@ layout: default
     color: #1a202c;
     text-align: left;
     text-indent: 0; /* 标题不缩进 */
-    margin-top: 1.5em;
-    margin-bottom: 0.8em;
+    margin-top: 3.2em; /* 段前距：2倍行距 (2 × 1.6 = 3.2em) */
+    margin-bottom: 3.2em; /* 段后距：2倍行距 (2 × 1.6 = 3.2em) */
     font-family: "Times New Roman", "Noto Serif SC", serif;
+    line-height: 1.6; /* 标题行高与正文一致 */
+    font-weight: 700;
+  }
+
+  /* 不同级别标题的字体大小 */
+  .content-original h1 {
+    font-size: 2em;
+    border-bottom: 2px solid #e1e4e8;
+    padding-bottom: 0.3em;
+  }
+
+  .content-original h2 {
+    font-size: 1.5em;
+    border-bottom: 1px solid #eaecef;
+    padding-bottom: 0.2em;
+  }
+
+  .content-original h3 {
+    font-size: 1.25em;
+  }
+
+  .content-original h4 {
+    font-size: 1.1em;
+  }
+
+  .content-original h5 {
+    font-size: 1em;
+  }
+
+  .content-original h6 {
+    font-size: 0.9em;
+    color: #6a737d;
+  }
+
+  /* 第一个标题不需要上边距 */
+  .content-original h1:first-child,
+  .content-original h2:first-child,
+  .content-original h3:first-child,
+  .content-original h4:first-child,
+  .content-original h5:first-child,
+  .content-original h6:first-child {
+    margin-top: 0;
   }
 
   /* 代码块保持左对齐，使用等宽字体 */
@@ -85,6 +138,8 @@ layout: default
     text-align: left;
     text-indent: 0;
     font-family: monospace; /* 代码使用等宽字体 */
+    margin-top: 0;
+    margin-bottom: 1.5em; /* 代码块段后距与正文一致 */
   }
 
   /* 引用块也可以两端对齐，可以缩进 */
@@ -95,8 +150,15 @@ layout: default
     border-left: 4px solid #e2e8f0;
     padding-left: 1em;
     margin-left: 0;
+    margin-top: 0;
+    margin-bottom: 1.5em; /* 引用块段后距与正文一致 */
     color: #4a5568;
     font-style: italic;
+    background-color: #f8f9fa;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-right: 1em;
+    border-radius: 0 4px 4px 0;
   }
   
   .sidebar-title {
@@ -193,6 +255,16 @@ layout: default
     /* 移动端可以保留缩进，也可以取消，根据个人喜好 */
     .content-original p {
       text-indent: 2em; /* 移动端保留缩进 */
+    }
+    /* 移动端标题间距稍微减小 */
+    .content-original h1,
+    .content-original h2,
+    .content-original h3,
+    .content-original h4,
+    .content-original h5,
+    .content-original h6 {
+      margin-top: 2.4em; /* 移动端：1.5倍行距 */
+      margin-bottom: 2.4em; /* 移动端：1.5倍行距 */
     }
   }
 </style>
