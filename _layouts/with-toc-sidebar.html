@@ -34,6 +34,46 @@ layout: default
   .content-original {
     flex: 1;
     min-width: 0;
+    /* 新增：改善正文阅读体验 + 两端对齐 */
+    color: #2d3748;
+    line-height: 1.6;
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+  }
+
+  /* 对段落和列表应用两端对齐 */
+  .content-original p,
+  .content-original ul,
+  .content-original ol,
+  .content-original li {
+    text-align: justify;
+    text-justify: inter-word;
+  }
+
+  /* 标题保持左对齐 */
+  .content-original h1,
+  .content-original h2,
+  .content-original h3,
+  .content-original h4,
+  .content-original h5,
+  .content-original h6 {
+    color: #1a202c;
+    text-align: left;
+    margin-top: 1.5em;
+    margin-bottom: 0.8em;
+  }
+
+  /* 代码块保持左对齐 */
+  .content-original pre,
+  .content-original code {
+    text-align: left;
+  }
+
+  /* 引用块也可以两端对齐 */
+  .content-original blockquote {
+    text-align: justify;
+    text-justify: inter-word;
   }
   
   .sidebar-title {
@@ -116,6 +156,13 @@ layout: default
       width: 100%;
       position: static;
       margin-left: 0;
+    }
+    /* 移动端取消两端对齐，因为屏幕较窄 */
+    .content-original,
+    .content-original p,
+    .content-original li {
+      text-align: left;
+      text-justify: auto;
     }
   }
 </style>
