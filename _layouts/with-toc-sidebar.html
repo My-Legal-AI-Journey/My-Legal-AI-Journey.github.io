@@ -3,6 +3,9 @@ layout: default
 ---
 
 <style>
+  /* 导入思源宋体 */
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap');
+  
   /* 视口单位靠边方案 */
   .page-container-wrapper {
     display: flex;
@@ -34,6 +37,66 @@ layout: default
   .content-original {
     flex: 1;
     min-width: 0;
+    /* 改善正文阅读体验 + 两端对齐 */
+    color: #2d3748;
+    line-height: 1.6;
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+    /* 字体设置：英文用Times New Roman，中文用思源宋体 */
+    font-family: "Times New Roman", "Noto Serif SC", serif;
+  }
+
+  /* 对段落应用两端对齐和段首缩进 */
+  .content-original p {
+    text-align: justify;
+    text-justify: inter-word;
+    text-indent: 2em; /* 段首缩进两个字符 */
+    margin-bottom: 1em;
+  }
+
+  /* 列表项不缩进 */
+  .content-original ul,
+  .content-original ol,
+  .content-original li {
+    text-align: justify;
+    text-justify: inter-word;
+    text-indent: 0; /* 列表不需要缩进 */
+  }
+
+  /* 标题保持左对齐，不缩进 */
+  .content-original h1,
+  .content-original h2,
+  .content-original h3,
+  .content-original h4,
+  .content-original h5,
+  .content-original h6 {
+    color: #1a202c;
+    text-align: left;
+    text-indent: 0; /* 标题不缩进 */
+    margin-top: 1.5em;
+    margin-bottom: 0.8em;
+    font-family: "Times New Roman", "Noto Serif SC", serif;
+  }
+
+  /* 代码块保持左对齐，使用等宽字体 */
+  .content-original pre,
+  .content-original code {
+    text-align: left;
+    text-indent: 0;
+    font-family: monospace; /* 代码使用等宽字体 */
+  }
+
+  /* 引用块也可以两端对齐，可以缩进 */
+  .content-original blockquote {
+    text-align: justify;
+    text-justify: inter-word;
+    text-indent: 2em;
+    border-left: 4px solid #e2e8f0;
+    padding-left: 1em;
+    margin-left: 0;
+    color: #4a5568;
+    font-style: italic;
   }
   
   .sidebar-title {
@@ -43,6 +106,7 @@ layout: default
     padding-bottom: 8px;
     border-bottom: 1px solid #e1e4e8;
     color: #24292e;
+    font-family: "Times New Roman", "Noto Serif SC", serif;
   }
   
   .sidebar-nav {
@@ -64,6 +128,7 @@ layout: default
     transition: all 0.2s ease;
     line-height: 1.3;
     font-size: 12px;
+    font-family: "Times New Roman", "Noto Serif SC", serif;
   }
   
   .sidebar-nav a:hover {
@@ -90,6 +155,7 @@ layout: default
     transition: all 0.2s ease;
     line-height: 1.3;
     font-size: 12px;
+    font-family: "Times New Roman", "Noto Serif SC", serif;
   }
   
   .toc-link:hover {
@@ -116,6 +182,17 @@ layout: default
       width: 100%;
       position: static;
       margin-left: 0;
+    }
+    /* 移动端取消两端对齐，因为屏幕较窄 */
+    .content-original,
+    .content-original p,
+    .content-original li {
+      text-align: left;
+      text-justify: auto;
+    }
+    /* 移动端可以保留缩进，也可以取消，根据个人喜好 */
+    .content-original p {
+      text-indent: 2em; /* 移动端保留缩进 */
     }
   }
 </style>
