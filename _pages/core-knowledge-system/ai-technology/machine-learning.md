@@ -3,7 +3,17 @@ layout: with-toc-sidebar
 title: "机器学习"
 permalink: /machine-learning/
 ---
-# 机器学习
+# machine learning
+
+Supervised learning is the type of machine learning that is used most in many real-world applications and has seen the most rapid advancements and innovation. In this specialization, which has three courses in total, the first and second courses will focus on supervised learning and the third will focus on unsperised learning, recommender systems. and reinforcement learning.
+
+## supervised learning
+
+
+
+## unsupervised learning
+
+
 
 *内容持续更新中...*
 
