@@ -1,1 +1,1 @@
-mv pages/* _drafts/ && rmdir pages/
+mv _pages/ _drafts/
